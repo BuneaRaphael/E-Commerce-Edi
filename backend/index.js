@@ -4,7 +4,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const collectionRoutes= require("./routes/collections.js")
+const bannerRoutes=require("./routes/banners")
 require("dotenv").config();
+
 
 const app = express();
 
@@ -29,6 +32,8 @@ const cartRoutes = require("./routes/cart");
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
+app.use("/api/collections",collectionRoutes)
+app.use("/api/banners",bannerRoutes)
 
 const PORT = process.env.PORT || 5000;
 
