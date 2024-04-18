@@ -1,16 +1,19 @@
-const mongoose = require('mongoose');
+// models/Banner.js
 
+const mongoose = require("mongoose");
+
+// Define Mongoose schema for Banner
 const bannerSchema = new mongoose.Schema({
-    wording: { type: String, required: true },
-    collection: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Collection',
-        required: true
-    }
+  image: { type: String, required: true },
+  wording: { type: String, required: true },
+  collectionId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Collection",
+    required: true,
+  },
 });
 
-bannerSchema.virtual('image').get(function() {
-    return this.populate('collection').collection.image;
-});
+// Create Mongoose model for Banner
+const Banner = mongoose.model("Banner", bannerSchema);
 
-module.exports = mongoose.model('Banner', bannerSchema);
+module.exports = Banner;
