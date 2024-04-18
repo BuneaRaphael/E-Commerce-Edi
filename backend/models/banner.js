@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 // Define Mongoose schema for Banner
 const bannerSchema = new mongoose.Schema({
   image: { type: String, required: true },
+  title: { type: String, required: true },
   wording: { type: String, required: true },
   collectionId: {
     type: mongoose.Schema.Types.ObjectId,

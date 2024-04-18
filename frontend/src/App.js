@@ -1,4 +1,5 @@
 import "./App.css";
+import BannerList from "./components/bannerList/BannerList";
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
 
@@ -8,6 +9,7 @@ function App() {
     <div className="App">
       <Header />
       <ProductList />
+      <BannerList />
       <Footer />
     </div>
   );

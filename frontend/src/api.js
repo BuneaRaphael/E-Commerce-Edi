@@ -11,4 +11,18 @@ export const fetchProducts = async () => {
   }
 };
 
-// Define similar functions for fetching collections, banners, etc.
+const fetchBanners = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/banners`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch banners");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("API Error:", error);
+    throw error;
+  }
+};
+
+export { fetchBanners };
