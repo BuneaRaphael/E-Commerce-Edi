@@ -21,3 +21,5 @@ H
 backend/models/banner.js,d/9/d9217483671678b1e3e99258d304c8d04627bccf
 L
 backend/models/collection.js,b/3/b36fff8091d3698724f1cb8a4afa7edca45b08fa
+E
+frontend/src/index.js,0/9/09a4e53ab0e5e7637fd01136f19a9bb570e1ef2d
