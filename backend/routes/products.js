@@ -18,6 +18,7 @@ router.post("/", async (req, res) => {
     name: req.body.name,
     price: req.body.price,
     description: req.body.description,
+    image: req.body.image,
   });
 
   try {

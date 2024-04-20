@@ -5,7 +5,7 @@ const Product = ({ product }) => {
     <div className="product">
       <h3>{product.name}</h3>
       <img
-        src={product.image}
+        src={`../../public/images/${product.image}`}
         alt={product.name}
         style={{ maxWidth: "200px" }}
       />

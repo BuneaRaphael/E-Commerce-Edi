@@ -9,7 +9,7 @@ const BannerList = () => {
     const fetchData = async () => {
       try {
         const response = await fetchBanners(); // Call imported API function
-        console.log(response);
+
         setBanners(response); // Update state with fetched banners
       } catch (error) {
         console.error("Error fetching banners:", error);
@@ -22,7 +22,7 @@ const BannerList = () => {
     <div className="banner-list">
       <h2>Banners</h2>
       <div className="banner-container">
-        {banners.map((banner) => (
+        {banners.slice(3, 11).map((banner, index) => (
           <Banner key={banner._id} banner={banner} />
         ))}
       </div>

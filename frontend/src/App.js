@@ -1,16 +1,10 @@
 import "./App.css";
-import BannerList from "./components/bannerList/BannerList";
-import Footer from "./components/footer/Footer";
-import Header from "./components/header/Header";
+import Home from "./pages/home/Home";
 
-import ProductList from "./components/productsList/ProductsList";
 function App() {
   return (
     <div className="App">
-      <Header />
-      <ProductList />
-      <BannerList />
-      <Footer />
+      <Home />
     </div>
   );
 }
