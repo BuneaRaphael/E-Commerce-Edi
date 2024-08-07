@@ -27,7 +27,7 @@ const Newsletter = () => {
       <div className="collection-scroll">
         {collections &&
           collections.map((collection) => (
-            <a key={collection.id} href={`/collections/${collection._id}`}>
+            <a key={collection._id} href={`/collections/${collection._id}`}>
               {collection.name}
             </a>
           ))}

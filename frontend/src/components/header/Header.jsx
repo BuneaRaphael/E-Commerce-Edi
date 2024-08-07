@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./header.scss";
+import RegisterComponent from "../register/Register";
 export default function Header() {
+  const [showRegister, setShowRegister] = useState(false);
+  const handleToggleRegister = () => {
+    setShowRegister(!showRegister); // Toggle the visibility of the register component
+  };
+
   return (
     <div>
       <header className="header">
@@ -32,7 +38,8 @@ export default function Header() {
           </button>
         </div>
         <div className="account">
-          <Link to="/">Log In</Link>
+          <button onClick={handleToggleRegister}>Account</button>
+          {showRegister && <RegisterComponent onClose={handleToggleRegister} />}
         </div>
         <div className="cart">
           <Link to="/">Cart</Link>

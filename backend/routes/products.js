@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../models/product");
-
+const productController = require("../controllers/productController");
 // Get all products
 router.get("/", async (req, res) => {
   try {
@@ -11,6 +11,7 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+router.get("/:id", productController.getProductById);
 
 // Create a new product
 router.post("/", async (req, res) => {

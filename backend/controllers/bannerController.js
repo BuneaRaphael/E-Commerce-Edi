@@ -38,9 +38,7 @@ exports.getAllBanners = async (req, res) => {
           title: banner.title,
           image: banner.image,
           wording: banner.wording,
-          collection: collection
-            ? { _id: collection._id, name: collection.name }
-            : null,
+          collectionId: collection ? collection._id : null,
         };
       })
     );
