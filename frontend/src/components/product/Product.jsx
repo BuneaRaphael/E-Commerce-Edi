@@ -12,7 +12,7 @@ const Product = ({ product }) => {
       <div className="product">
         <h3>{product.name}</h3>
         <img
-          src={`../../images/${product.image}`}
+          src={`../../images/${product.image[0]}`}
           alt={product.name}
           style={{ maxWidth: "200px" }}
         />

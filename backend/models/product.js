@@ -10,7 +10,8 @@ const productSchema = new mongoose.Schema({
     required: true,
   },
   description: String,
-  image: String,
+  gender: [String],
+  image: [String],
   collectionId: String,
 });
 

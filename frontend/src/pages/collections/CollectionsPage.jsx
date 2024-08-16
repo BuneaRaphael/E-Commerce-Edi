@@ -39,7 +39,7 @@ const CollectionsPage = () => {
           >
             <div key={product._id} className="product-item">
               <h4>{product.name}</h4>
-              <img src={`/images/${product.image}`} alt={product.name} />
+              <img src={`/images/${product.image[0]}`} alt={product.name} />
               <p>{product.description}</p>
             </div>
           </Link>

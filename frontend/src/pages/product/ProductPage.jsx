@@ -26,7 +26,7 @@ const ProductPage = () => {
   return (
     <div className="product-detail">
       <h2>{product.name}</h2>
-      <img src={`/images/${product.image}`} alt={product.name} />
+      <img src={`/images/${product.image[0]}`} alt={product.name} />
       <p>{product.description}</p>
       <p>Price: ${product.price.toFixed(2)}</p>
     </div>
