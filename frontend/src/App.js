@@ -7,7 +7,7 @@ import ProductPage from "./pages/product/ProductPage.jsx";
 import CollectionsPage from "./pages/collections/CollectionsPage.jsx";
 import ShopPage from "./pages/shop/ShopPage.jsx";
 import Account from "./pages/account/Account.jsx";
-
+import CartPage from "./pages/cart/CartPage.jsx";
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +18,7 @@ function App() {
         <Route path="product/:id" element={<ProductPage />} />
         <Route path="shop" element={<ShopPage />} />
         <Route path="/account" element={<Account />} />
+        <Route path="/cart" element={<CartPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

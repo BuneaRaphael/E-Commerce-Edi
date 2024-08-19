@@ -1,1 +1,83 @@
-img {max-width:200px}
+.collection-detail {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Roboto', sans-serif; // Apply the Roboto font for consistency
+  a{
+    text-decoration: none;
+  }
+  h2 {
+    font-size: 2.5rem; // Increase font size for better visibility
+    margin-bottom: 1rem; // Add space below the title
+    color: #333; // Dark color for readability
+    font-weight: 700; // Bold font weight for emphasis
+  }
+
+  img {
+    width: 100%; // Ensure image takes full width of its container
+    height: auto; // Maintain aspect ratio
+    display: block;
+    border-radius: 8px; // Rounded corners for a modern look
+    margin-bottom: 1.5rem; // Add space below the image
+  }
+
+  p {
+    font-size: 1.1rem; // Slightly larger font size for better readability
+    line-height: 1.6; // Increase line height for improved readability
+    color: #333; // Dark color for text
+    margin-bottom: 1.5rem; // Add space below paragraphs
+  }
+
+  .products {
+    margin-top: 2rem; // Add more space above the products section
+    display: grid; // Use grid layout for products
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); // Responsive grid with flexible columns
+    gap: 1.5rem; // Space between grid items
+
+    h3 {
+      font-size: 2rem; // Increase font size for section title
+      margin-bottom: 1.5rem; // Space below the section title
+      color: #555; // Slightly lighter color for the title
+      font-weight: 700; // Bold font weight for emphasis
+    }
+
+    .product-item {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Add subtle shadow for depth
+
+      &:hover {
+        background-color: #fafafa; // Light background on hover
+        border-color: #ccc; // Light border color on hover
+      }
+
+      img {
+        max-width: 200px; // Increase the maximum width of product images
+        height: auto;
+        margin-bottom: 1rem;
+        border-radius: 4px; // Rounded corners for images
+      }
+
+      h4 {
+        font-size: 1.4rem; // Increase font size for product names
+        margin-bottom: 0.5rem; // Space below the product name
+        color: #333; // Dark color for readability
+        text-align: center; // Center align text
+        font-weight: 700; // Bold font weight
+      }
+
+      p {
+        font-size: 1rem; // Larger font size for product descriptions
+        text-align: center; // Center align text
+        color: #666; // Lighter color for less emphasis
+      }
+    }
+  }
+}

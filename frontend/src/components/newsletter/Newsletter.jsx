@@ -1,6 +1,6 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./newsletter.scss";
+
 const Newsletter = () => {
   const [collections, setCollections] = useState([]);
 
@@ -10,7 +10,7 @@ const Newsletter = () => {
         const response = await fetch("http://localhost:8800/api/collections");
         if (response.ok) {
           const data = await response.json();
-          setCollections(data); // Store fetched collections in state
+          setCollections(data);
         } else {
           throw new Error("Failed to fetch collections");
         }
@@ -21,16 +21,15 @@ const Newsletter = () => {
 
     fetchCollections();
   }, []);
+
   return (
     <div className="newsletter">
-      <h3>Newsletter</h3>
       <div className="collection-scroll">
-        {collections &&
-          collections.map((collection) => (
-            <a key={collection._id} href={`/collections/${collection._id}`}>
-              {collection.name}
-            </a>
-          ))}
+        {collections.map((collection) => (
+          <a key={collection._id} href={`/collections/${collection._id}`}>
+            <span>&#x25A0;</span> {collection.name}
+          </a>
+        ))}
       </div>
     </div>
   );

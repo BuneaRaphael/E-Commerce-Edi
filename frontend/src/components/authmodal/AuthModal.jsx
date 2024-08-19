@@ -1,12 +1,18 @@
+// AuthModal.jsx
+
 import React, { useState } from "react";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import { useCart } from "../../context/CartContext";
+import "./authmodal.scss"; // Ensure the path is correct
 
 const AuthModal = ({ onClose }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const [error, setError] = useState(""); // State to store error messages
+  const [error, setError] = useState("");
+  const { cart, clearCart } = useCart();
 
   const validateInputs = () => {
     if (!email || !password) {
@@ -21,12 +27,12 @@ const AuthModal = ({ onClose }) => {
       setError("Username is required for registration.");
       return false;
     }
-    setError(""); // Clear any previous errors
+    setError("");
     return true;
   };
 
   const handleAuth = async () => {
-    if (!validateInputs()) return; // Perform validation before sending request
+    if (!validateInputs()) return;
 
     try {
       const endpoint = isLogin ? "login" : "register";
@@ -35,13 +41,37 @@ const AuthModal = ({ onClose }) => {
         {
           email,
           password,
-          ...(isLogin ? {} : { username }), // Only include username if registering
+          ...(isLogin ? {} : { username }),
         }
       );
-      localStorage.setItem("token", response.data.token); // Store token
-      onClose(); // Close the modal
+
+      const token = response.data.token;
+      localStorage.setItem("token", token);
+
+      if (isLogin) {
+        const userId = jwtDecode(token).id;
+
+        if (cart.length) {
+          await axios.post(
+            "http://localhost:8800/api/cart",
+            { userId, items: cart },
+            { headers: { Authorization: `Bearer ${token}` } }
+          );
+          clearCart();
+        }
+      }
+
+      onClose();
+      window.location.reload(); // Optional: Refresh page to update login state
     } catch (error) {
-      setError("Authentication error. Please try again.");
+      console.error("Authentication error:", error);
+      if (error.response && error.response.status === 400) {
+        setError(error.response.data.message);
+      } else if (error.response && error.response.status === 500) {
+        setError("Internal Server Error. Please try again later.");
+      } else {
+        setError("An unexpected error occurred. Please try again.");
+      }
     }
   };
 
@@ -50,7 +80,7 @@ const AuthModal = ({ onClose }) => {
     setEmail("");
     setPassword("");
     setUsername("");
-    setError(""); // Clear error message when switching modes
+    setError("");
   };
 
   return (
@@ -77,13 +107,16 @@ const AuthModal = ({ onClose }) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        {error && <p className="error-message">{error}</p>}{" "}
-        {/* Display error messages */}
-        <button onClick={handleAuth}>{isLogin ? "Login" : "Register"}</button>
-        <button onClick={switchMode}>
+        {error && <p className="error-message">{error}</p>}
+        <button className="auth-button" onClick={handleAuth}>
+          {isLogin ? "Login" : "Register"}
+        </button>
+        <button className="switch-button" onClick={switchMode}>
           {isLogin ? "Need an account? Register" : "Have an account? Login"}
         </button>
-        <button onClick={onClose}>Close</button>
+        <button className="close-button" onClick={onClose}>
+          Close
+        </button>
       </div>
     </div>
   );

@@ -1,41 +1,56 @@
+// routes/cart.js
+
 const express = require("express");
 const router = express.Router();
-const Cart = require("../models/cart");
+const Cart = require("../models/Cart"); // Your Cart model
+const authMiddleware = require("../middleware/authMiddleware"); // Your authentication middleware
 
-// Get user's cart
-router.get("/:userId", async (req, res) => {
+// Get cart items for a logged-in user
+router.get("/", authMiddleware, async (req, res) => {
   try {
-    const cart = await Cart.findOne({ userId: req.params.userId }).populate(
-      "products.productId"
-    );
+    const userId = req.user.id; // User ID from token
+    const cart = await Cart.findOne({ userId });
     res.json(cart);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
   }
 });
 
-// Add product to user's cart
-router.post("/:userId", async (req, res) => {
+// Add items to cart
+router.post("/", authMiddleware, async (req, res) => {
   try {
-    const cart = await Cart.findOne({ userId: req.params.userId });
+    const userId = req.body.userId;
+    const newItem = req.body.items[0]; // Assume single item for simplicity
+    let cart = await Cart.findOne({ userId });
 
-    // Check if the product is already in the cart
-    const existingProduct = cart.products.find(
-      (item) => item.productId.toString() === req.body.productId
-    );
-
-    if (existingProduct) {
-      // If the product exists, increment the quantity
-      existingProduct.quantity += 1;
+    if (!cart) {
+      cart = new Cart({ userId, items: [newItem] });
     } else {
-      // If the product doesn't exist, add it to the cart
-      cart.products.push({ productId: req.body.productId });
+      cart.items.push(newItem);
     }
 
     await cart.save();
-    res.status(201).json(cart);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.json(cart);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// Remove item from cart
+router.delete("/:itemId", authMiddleware, async (req, res) => {
+  try {
+    const userId = req.body.userId;
+    const itemId = req.params.itemId;
+    let cart = await Cart.findOne({ userId });
+
+    if (cart) {
+      cart.items = cart.items.filter((item) => item._id.toString() !== itemId);
+      await cart.save();
+    }
+
+    res.json(cart);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
   }
 });
 

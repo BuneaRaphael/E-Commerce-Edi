@@ -2,27 +2,30 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./header.scss";
 import AuthModal from "../authmodal/AuthModal";
+import { useCart } from "../../context/CartContext";
 
 export default function Header() {
   const [showAuthModal, setShowAuthModal] = useState(false);
-
+  const { cart } = useCart();
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
+  // Handle search input change
   const handleInputChange = (e) => {
     setSearchQuery(e.target.value);
   };
 
+  // Handle search form submission
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       // Redirect to the shop page with the search query
       navigate(`/shop?search=${encodeURIComponent(searchQuery)}`);
     }
-
     setSearchQuery("");
   };
 
+  // Handle account button click
   const handleAccountClick = () => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -33,49 +36,64 @@ export default function Header() {
   };
 
   return (
-    <div>
-      <header className="header">
+    <header className="header">
+      <div className="header__left">
         <div className="logo">
-          <Link to="/">My E-Commerce App</Link>
+          <Link to="/">
+            <img src="/images/logo.png" alt="Coven" />
+          </Link>
         </div>
 
         <nav className="nav">
           <ul>
             <li>
-              <Link to="/">Sale</Link>
+              <Link to="/shop" className="sale-link">
+                SALE
+              </Link>
             </li>
             <li>
-              <Link to="/">New Arrivals</Link>
+              <Link to="/shop">NEW ARRIVALS</Link>
             </li>
             <li>
-              <Link to="/">Men</Link>
+              <Link to="/shop">MEN</Link>
             </li>
             <li>
-              <Link to="/">Women</Link>
+              <Link to="/shop">WOMEN</Link>
             </li>
           </ul>
         </nav>
+      </div>
 
-        <div className="search-container">
+      <div className="header__right">
+        <div className="search">
           <form onSubmit={handleSearch}>
             <input
               type="text"
-              placeholder="Search for products..."
+              placeholder="SEARCH"
               value={searchQuery}
               onChange={handleInputChange}
               className="search-input"
             />
-            <button type="submit" className="search-button">
-              Search
-            </button>
           </form>
         </div>
-        <button onClick={handleAccountClick}>Account</button>
-        <div className="cart">
-          <Link to="/">Cart</Link>
+
+        <div className="account">
+          <button onClick={handleAccountClick} className="account-button">
+            Account
+          </button>
         </div>
-        {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
-      </header>
-    </div>
+
+        <div className="cart">
+          <Link to="/cart">
+            <span role="img" aria-label="cart">
+              🛒
+            </span>{" "}
+            ({cart.length})
+          </Link>
+        </div>
+      </div>
+
+      {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
+    </header>
   );
 }

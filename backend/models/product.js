@@ -13,6 +13,7 @@ const productSchema = new mongoose.Schema({
   gender: [String],
   image: [String],
   collectionId: String,
+  sizes: [String],
 });
 
 module.exports = mongoose.model("Product", productSchema);

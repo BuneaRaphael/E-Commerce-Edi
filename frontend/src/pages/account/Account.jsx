@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import LogoutButton from "../../components/logout/Logout";
+import "./account.scss";
 const Account = () => {
   const [userInfo, setUserInfo] = useState(null);
   const navigate = useNavigate();
@@ -27,14 +28,6 @@ const Account = () => {
     fetchUserInfo();
   }, [navigate]);
 
-  const handleLogout = () => {
-    // Remove token from localStorage
-    localStorage.removeItem("token");
-
-    // Redirect to the home page or login page
-    navigate("/");
-  };
-
   return (
     <div className="account-page">
       {userInfo ? (
@@ -45,7 +38,7 @@ const Account = () => {
       ) : (
         <p>Loading...</p>
       )}
-      <button onClick={handleLogout}>Logout</button>
+      <LogoutButton />
     </div>
   );
 };

@@ -1,0 +1,11 @@
+.products-list {
+  padding: 60px 20px; // Add padding to give space around the products list
+  background-color: #f8f8f8; // Light background color to contrast with the hero section
+
+  .products-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; // Space between products
+    justify-content: center; // Center align products in the container
+  }
+}

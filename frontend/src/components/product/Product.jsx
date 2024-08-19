@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import React from "react";
-
+import "./product.scss";
 const Product = ({ product }) => {
   return (
     <Link

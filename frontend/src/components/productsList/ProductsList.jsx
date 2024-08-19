@@ -29,15 +29,16 @@ const ProductList = () => {
     return <p>Loading...</p>;
   }
   return (
-    <div>
-      <h2>Products</h2>
-      {products.length > 0 ? (
-        products.map((product) => (
-          <Product key={product._id} product={product} />
-        ))
-      ) : (
-        <p>No products available</p>
-      )}
+    <div className="products-list">
+      <div className="products-container">
+        {products.length > 0 ? (
+          products.map((product) => (
+            <Product key={product._id} product={product} />
+          ))
+        ) : (
+          <p>No products available</p>
+        )}
+      </div>
     </div>
   );
 };

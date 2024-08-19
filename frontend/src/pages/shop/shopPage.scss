@@ -1,1 +1,65 @@
-img {max-width: 200px;}
+.shop {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #f9f9f9; // Light background color
+
+  h2 {
+    font-size: 2rem; // Font size for the heading
+    margin-bottom: 2rem; // Space below the heading
+    text-align: center; // Center the heading
+    color: #333; // Dark color for better readability
+  }
+
+  .product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); // Responsive grid layout
+    gap: 2rem; // Space between product cards
+
+    .product-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none; // Remove default link styling
+      background-color: #fff; // White background for product cards
+      border: 1px solid #e0e0e0; // Light border for product cards
+      border-radius: 8px; // Rounded corners
+      padding: 1rem; // Padding inside the card
+      transition: box-shadow 0.3s ease; // Smooth transition for hover effect
+
+      &:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); // Subtle shadow on hover
+      }
+
+      .product-image {
+        width: 100%; // Full width of the card
+        height: auto; // Maintain aspect ratio
+        max-height: 200px; // Limit the height of the image
+        object-fit: cover; // Ensure image covers area without distortion
+        border-radius: 4px; // Rounded corners for the image
+        margin-bottom: 1rem; // Space below the image
+      }
+
+      h3 {
+        font-size: 1.2rem; // Font size for product names
+        margin: 0.5rem 0; // Margin around the product name
+        color: #333; // Dark color for better readability
+        text-align: center; // Center-align text
+      }
+
+      p {
+        font-size: 1rem; // Font size for price
+        color: #777; // Lighter color for description
+        text-align: center; // Center-align text
+      }
+    }
+  }
+
+  // Style for when no products are available
+  p {
+    font-size: 1.2rem; // Font size for the no products message
+    text-align: center; // Center-align text
+    color: #777; // Lighter color for the message
+    margin-top: 2rem; // Space above the message
+  }
+}

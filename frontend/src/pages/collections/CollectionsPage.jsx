@@ -30,17 +30,13 @@ const CollectionsPage = () => {
       <img src={`/images/${collection.image}`} alt={collection.name} />
       <p>{collection.description}</p>
       <div className="products">
-        <h3>Products</h3>
         {collection.products.map((product) => (
-          <Link
-            to={`/product/${product._id}`}
-            key={product._id}
-            className="product-item"
-          >
+          <Link to={`/product/${product._id}`} key={product._id}>
             <div key={product._id} className="product-item">
               <h4>{product.name}</h4>
               <img src={`/images/${product.image[0]}`} alt={product.name} />
               <p>{product.description}</p>
+              <p>Price: ${product.price}</p>
             </div>
           </Link>
         ))}

@@ -20,7 +20,6 @@ const BannerList = () => {
 
   return (
     <div className="banner-list">
-      <h2>Banners</h2>
       <div className="banner-container">
         {banners.slice(1, 11).map((banner, index) => (
           <Banner key={banner._id} banner={banner} />
