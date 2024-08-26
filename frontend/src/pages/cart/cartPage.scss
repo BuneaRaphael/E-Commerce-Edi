@@ -1,11 +1,9 @@
-/* cartpage.scss */
-
 .cart-page {
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
   font-family: Arial, sans-serif;
-  
+
   h1 {
     font-size: 2rem;
     margin-bottom: 20px;
@@ -21,15 +19,17 @@
     margin-bottom: 10px;
     border-radius: 5px;
     background-color: #f9f9f9;
+    flex-wrap: wrap; // Ensure items wrap on small screens
     
     .item-info {
       flex: 1;
-      .item-container{
+      .item-container {
         display: flex;
         flex-direction: column;
-   
         margin-right: 10px;
-        img{max-width: 100px;}
+        img {
+          max-width: 100px;
+        }
       }
       p {
         margin: 5px 0;
@@ -59,18 +59,19 @@
     font-size: 1.2rem;
     color: #888;
   }
-}
-button{
-  background-color: #ff4d4d;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 0.9rem;
-  transition: background-color 0.3s ease;
 
-  &:hover {
-    background-color: #e60000;
+  @media (max-width: 768px) {
+      padding: 10px;
+      h1 {
+          font-size: 1.5rem;
+      }
+      .cart-item {
+          flex-direction: column;
+          align-items: flex-start;
+          .remove-button {
+              align-self: flex-end;
+              margin-top: 10px;
+          }
+      }
   }
 }

@@ -81,7 +81,11 @@ const AuthModal = ({ onClose }) => {
     setUsername("");
     setError("");
   };
-
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleAuth();
+    }
+  };
   return (
     <div className="auth-modal">
       <div className="auth-modal-content">
@@ -92,6 +96,7 @@ const AuthModal = ({ onClose }) => {
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
         )}
         <input
@@ -99,12 +104,14 @@ const AuthModal = ({ onClose }) => {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
         {error && <p className="error-message">{error}</p>}
         <button className="auth-button" onClick={handleAuth}>

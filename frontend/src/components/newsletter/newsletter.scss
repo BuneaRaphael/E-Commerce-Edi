@@ -3,7 +3,7 @@
   overflow: hidden;
   border-top: 2px solid #000;
   border-bottom: 2px solid #000;
-  padding:1rem;
+  padding: 1rem;
 
   .collection-scroll {
     display: flex;
@@ -30,13 +30,24 @@
       }
     }
   }
-}
 
-@keyframes scroll {
-  0% {
-    transform: translateX(100%); /* Start with the content just off the right edge */
+  @media (max-width: 768px) {
+      .collection-scroll a {
+          font-size: 16px;
+          margin: 0 20px;
+          span {
+              font-size: 20px;
+              margin-right: 10px;
+          }
+      }
   }
-  100% {
-    transform: translateX(-100%); /* Move to just off the left edge */
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(100%); /* Start with the content just off the right edge */
+    }
+    100% {
+      transform: translateX(-100%); /* Move to just off the left edge */
+    }
   }
 }

@@ -15,31 +15,48 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease; // Smooth transitions for hover effects
 
   &:hover {
-    transform: translateY(-5px); // Slight lift effect on hover
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); // Enhanced shadow on hover
+      transform: translateY(-5px); // Slight lift effect on hover
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); // Enhanced shadow on hover
   }
 
   h3 {
-    font-size: 18px; // Font size for product names
-    margin: 10px 0; // Margin around the name
-    color: #333; // Darker color for better readability
+      font-size: 18px; // Font size for product names
+      margin: 10px 0; // Margin around the name
+      color: #333; // Darker color for better readability
   }
 
   img {
-    max-width: 100%; // Ensure image fits within the product card
-    height: auto; // Maintain aspect ratio
-    border-bottom: 1px solid #ddd; // Light border under image
-    margin-bottom: 15px; // Space below image
+      max-width: 100%; // Ensure image fits within the product card
+      height: auto; // Maintain aspect ratio
+      border-bottom: 1px solid #ddd; // Light border under image
+      margin-bottom: 15px; // Space below image
   }
 
   p {
-    font-size: 14px; // Font size for description and price
-    color: #666; // Lighter color for description
-    margin: 5px 0; // Margin around text
+      font-size: 14px; // Font size for description and price
+      color: #666; // Lighter color for description
+      margin: 5px 0; // Margin around text
   }
 
   .price {
-    font-weight: bold; // Emphasize the price
-    color: #000; // Dark color for price
+      font-weight: bold; // Emphasize the price
+      color: #000; // Dark color for price
+  }
+
+  @media (max-width: 768px) {
+      width: 100%;
+      padding: 15px;
+
+      h3 {
+          font-size: 16px;
+      }
+
+      p {
+          font-size: 12px;
+      }
+
+      .price {
+          font-size: 16px;
+      }
   }
 }

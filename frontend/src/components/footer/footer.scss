@@ -1,86 +1,112 @@
 .footer {
-    background-color: #f9f9f9;
-    padding: 20px 40px;
-    font-family: Arial, sans-serif;
-    border-top: 1px solid #ddd;
-  
-    &__container {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 20px;
+  background-color: #f9f9f9;
+  padding: 20px 40px;
+  font-family: Arial, sans-serif;
+  border-top: 1px solid #ddd;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Ensure items wrap on small screens */
+  }
+
+  &__section {
+    flex: 1;
+    padding: 0 10px;
+    margin-bottom: 20px; /* Add spacing between sections */
+
+    h4 {
+      font-size: 14px;
+      color: #000;
+      margin-bottom: 10px;
     }
-  
-    &__section {
-      flex: 1;
-      padding: 0 10px;
-  
-      h4 {
-        font-size: 14px;
-        color: #000;
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        font-size: 12px;
+        color: #333;
+        margin-bottom: 5px;
+      }
+    }
+
+    &.newsletter {
+      p {
+        font-size: 12px;
+        color: #333;
         margin-bottom: 10px;
       }
-  
-      ul {
-        list-style: none;
-        padding: 0;
-  
-        li {
-          font-size: 12px;
-          color: #333;
-          margin-bottom: 5px;
-        }
-      }
-  
-      &.newsletter {
-        p {
-          font-size: 12px;
-          color: #333;
-          margin-bottom: 10px;
-        }
-  
-        .newsletter__signup {
-          display: flex;
-  
-          input {
-            flex: 1;
-            padding: 5px;
-            border: 1px solid #ddd;
-            font-size: 12px;
-            margin-right: 10px;
-          }
-  
-          button {
-            background-color: #000;
-            color: #fff;
-            padding: 6px 10px;
-            font-size: 12px;
-            border: none;
-            cursor: pointer;
-            &:hover {
-              background-color: #333; /* Darker background on hover */
-            }}
-        }
-      }
-    }
-  
-    &__bottom {
-      display: flex;
-      justify-content: space-between;
-      font-size: 10px;
-      color: #666;
-  
-      .footer__links {
+
+      .newsletter__signup {
         display: flex;
-  
-        a {
-          color: #000;
-          margin-left: 15px;
-          text-decoration: none;
+
+        input {
+          flex: 1;
+          padding: 5px;
+          border: 1px solid #ddd;
+          font-size: 12px;
+          margin-right: 10px;
+        }
+
+        button {
+          background-color: #000;
+          color: #fff;
+          padding: 6px 10px;
+          font-size: 12px;
+          border: none;
+          cursor: pointer;
           &:hover {
-            text-decoration: underline;
+            background-color: #333; /* Darker background on hover */
           }
         }
       }
     }
   }
-  
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #666;
+
+    .footer__links {
+      display: flex;
+
+      a {
+        color: #000;
+        margin-left: 15px;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+      padding: 10px 20px;
+
+      &__container {
+          flex-direction: column;
+      }
+
+      &__section {
+          margin-bottom: 10px;
+      }
+
+      &__bottom {
+          flex-direction: column;
+          text-align: center;
+
+          .footer__links {
+              justify-content: center;
+              a {
+                  margin-left: 10px;
+              }
+          }
+      }
+  }
+}
