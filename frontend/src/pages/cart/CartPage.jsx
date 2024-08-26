@@ -3,7 +3,7 @@ import { useCart } from "../../context/CartContext";
 import "./cartPage.scss"; // Import the SCSS file
 
 const CartPage = () => {
-  const { cart, removeFromCart } = useCart();
+  const { cart, removeFromCart, clearCart } = useCart();
 
   return (
     <div className="cart-page">
@@ -12,7 +12,10 @@ const CartPage = () => {
         cart.map((item) => (
           <div key={item.productId} className="cart-item">
             <div className="item-info">
-              <p>{item.productId.name}</p>
+              <div className="item-container">
+                <p>Name:{item.name}</p>
+                <img src={`/images/${item.image}`} alt={item.name} />
+              </div>
               <p>Size: {item.size}</p>
               <p>Quantity: {item.quantity}</p>
             </div>
@@ -27,6 +30,11 @@ const CartPage = () => {
       ) : (
         <p className="empty-cart">Your cart is empty.</p>
       )}
+      {cart.length > 0 ? (
+        <button className="remove-button" onClick={() => clearCart()}>
+          Clear Cart
+        </button>
+      ) : null}
     </div>
   );
 };

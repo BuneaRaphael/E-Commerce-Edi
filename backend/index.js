@@ -6,6 +6,9 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const collectionRoutes = require("./routes/collections.js");
 const bannerRoutes = require("./routes/banners");
+const authRoutes = require("./routes/auth");
+const productRoutes = require("./routes/products");
+const cartRoutes = require("./controllers/cartController.js");
 require("dotenv").config();
 
 const app = express();
@@ -30,11 +33,6 @@ mongoose
   })
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
-
-// Routes
-const authRoutes = require("./routes/auth");
-const productRoutes = require("./routes/products");
-const cartRoutes = require("./routes/cart");
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);

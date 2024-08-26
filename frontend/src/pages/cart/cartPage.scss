@@ -24,7 +24,13 @@
     
     .item-info {
       flex: 1;
-      
+      .item-container{
+        display: flex;
+        flex-direction: column;
+   
+        margin-right: 10px;
+        img{max-width: 100px;}
+      }
       p {
         margin: 5px 0;
         font-size: 1rem;
@@ -52,5 +58,19 @@
     text-align: center;
     font-size: 1.2rem;
     color: #888;
+  }
+}
+button{
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #e60000;
   }
 }

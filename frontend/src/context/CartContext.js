@@ -8,7 +8,7 @@ export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
-  const [products, setProducts] = useState([]);
+  //const [products, setProducts] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Function to get userId from token
@@ -16,7 +16,7 @@ export const CartProvider = ({ children }) => {
     const token = localStorage.getItem("token");
     if (token) {
       const decodedToken = jwtDecode(token);
-      return decodedToken?.id;
+      return decodedToken?.userId;
     }
     return null;
   };
@@ -27,21 +27,14 @@ export const CartProvider = ({ children }) => {
       if (userId) {
         setIsLoggedIn(true);
         try {
-          const response = await axios.get("http://localhost:8800/api/cart", {
+          const response = await axios.get(`http://localhost:8800/api/cart`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           });
-          const cartItems = response.data.cart.items || [];
-          setCart(cartItems);
 
-          // Fetch product details for each cart item
-          const productIds = cartItems.map((item) => item.productId);
-          const productsResponse = await axios.post(
-            "http://localhost:8800/api/products/details",
-            { productIds }
-          );
-          setProducts(productsResponse.data.products || []);
+          const cartItems = response.data.items || [];
+          setCart(cartItems);
         } catch (error) {
           console.error(
             "Failed to fetch cart:",
@@ -58,8 +51,8 @@ export const CartProvider = ({ children }) => {
     fetchCart();
   }, []);
 
-  const addToCart = async (productId, quantity, size) => {
-    const newItem = { productId, quantity, size };
+  const addToCart = async (productId, name, image, quantity, size) => {
+    const newItem = { productId, name, image: image[0], quantity, size };
     const userId = getUserIdFromToken();
 
     if (userId) {
@@ -73,8 +66,9 @@ export const CartProvider = ({ children }) => {
             },
           }
         );
-        setCart(response.data.cart.items || []);
+        setCart(response.data.items || []);
       } catch (error) {
+        console.log(error);
         console.error(
           "Failed to add to cart:",
           error.response?.data || error.message
@@ -111,7 +105,7 @@ export const CartProvider = ({ children }) => {
             data: { userId },
           }
         );
-        setCart(response.data.cart.items || []);
+        setCart(response.data.items || []);
       } catch (error) {
         console.error(
           "Failed to remove from cart:",
@@ -124,7 +118,29 @@ export const CartProvider = ({ children }) => {
       localStorage.setItem("cart", JSON.stringify(updatedCart));
     }
   };
+  const clearCart = async () => {
+    const userId = getUserIdFromToken();
 
+    if (userId) {
+      try {
+        const response = await axios.delete(`http://localhost:8800/api/cart/`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          data: { userId },
+        });
+        setCart(response.data.items || []);
+      } catch (error) {
+        console.error(
+          "Failed to remove from cart:",
+          error.response?.data || error.message
+        );
+      }
+    } else {
+      setCart([]);
+      localStorage.setItem("cart", cart);
+    }
+  };
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("cart");
@@ -134,7 +150,7 @@ export const CartProvider = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={{ cart, products, addToCart, removeFromCart, handleLogout }}
+      value={{ cart, addToCart, removeFromCart, handleLogout, clearCart }}
     >
       {children}
     </CartContext.Provider>

@@ -12,7 +12,7 @@ const AuthModal = ({ onClose }) => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
-  const { cart, clearCart } = useCart();
+  const { cart } = useCart();
 
   const validateInputs = () => {
     if (!email || !password) {
@@ -57,7 +57,6 @@ const AuthModal = ({ onClose }) => {
             { userId, items: cart },
             { headers: { Authorization: `Bearer ${token}` } }
           );
-          clearCart();
         }
       }
 

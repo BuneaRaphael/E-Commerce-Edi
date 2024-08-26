@@ -35,7 +35,7 @@ const ProductPage = () => {
       alert("Please select a size.");
       return;
     }
-    addToCart(product._id, quantity, selectedSize);
+    addToCart(product._id, product.name, product.image, quantity, selectedSize);
   };
 
   if (loading) return <div>Loading...</div>;
